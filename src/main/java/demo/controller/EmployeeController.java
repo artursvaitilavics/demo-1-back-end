@@ -4,10 +4,7 @@ package demo.controller;
 import demo.entity.Employee;
 import demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,8 +22,9 @@ public class EmployeeController {
     }
 
     @GetMapping("")
-    public List<Employee> getAllEmployees() {
-        return employeeService.findAllEmployees();
+    public List<Employee> getAllEmployees(@RequestParam(defaultValue = "0") Integer pageNumber,
+                                          @RequestParam(defaultValue = "10") Integer pageSize) {
+        return employeeService.findAllEmployees(pageNumber, pageSize);
     }
 
 }
